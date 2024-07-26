@@ -1,5 +1,5 @@
 #include"shaderClass.h"
-
+#include<glfw3.h>
 // Reads a text file and outputs a string with everything in the text file
 std::string get_file_contents(const char* filename)
 {
@@ -59,7 +59,11 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 // Activates the Shader Program
 void Shader::Activate()
 {
+	float timeValue = glfwGetTime();
+	float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+	int vertexColorLocation = glGetUniformLocation(ID, "ourColor");
 	glUseProgram(ID);
+	glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 }
 
 // Deletes the Shader Program
